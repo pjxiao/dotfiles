@@ -1,0 +1,33 @@
+#!/bin/bash -x
+
+# Check whether ``sudo`` is installed
+which sudo || \
+    ( su -c "apt-get install -y sudo && usermod -aG sudo $(whoami)" &&\
+    echo "Logout and re-execute ./install" )
+
+# Register repositories
+cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
+# Debian 8 "Jessie"
+deb http://httpredir.debian.org/debian/ jessie main contrib
+EOL
+
+# Update
+sudo apt-get update
+
+# Install packages
+sudo apt-get install -y \
+    git vim byobu fonts-vlgothic uim-mozc uim-gtk3 \
+    linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
+    xsel python-pip python-dev
+
+sudo pip install mercurial
+
+# Download dotfiles
+[ -d "$HOME/dotfiles" ] || \
+    git clone https://github.com/pjxiao/dotfiles "$HOME/dotfiles"
+
+# Configure dotfiles
+grep -q '# Load dotfiles' $HOME/.bashrc || \
+    echo -e '\n# Load dotfiles\nsource ~/dotfiles/.bashrc' >> $HOME/.bashrc
+grep -q '" Load dotfiles' $HOME/.vimrc || \
+    echo -e '\n" Load dotfiles\nexe '"'source'"' $HOME . "/dotfiles/.vimrc"' >> $HOME/.vimrc
