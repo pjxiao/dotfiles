@@ -16,8 +16,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export HISTTIMEFORMAT='%FT%T '
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -113,8 +114,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -d ~/.bashrc.d ]; then
-    for rc in `find ~/.bashrc.d -type f`
+
+
+bash_parts=$(dirname $BASH_SOURCE)/.bashrc.d
+if [ -d "$bash_parts" ]; then
+    for rc in `find $bash_parts -type f`
     do
         source ${rc}
     done
@@ -122,8 +126,12 @@ fi
 
 set -o vi
 
-# The next line updates PATH for the Google Cloud SDK.
-source /home/xiao/google-cloud-sdk/path.bash.inc
+if [ -d "/home/xiao/google-cloud-sdk" ]; then
 
-# The next line enables bash completion for gcloud.
-source /home/xiao/google-cloud-sdk/completion.bash.inc
+    # The next line updates PATH for the Google Cloud SDK.
+    source /home/xiao/google-cloud-sdk/path.bash.inc
+
+    # The next line enables bash completion for gcloud.
+    source /home/xiao/google-cloud-sdk/completion.bash.inc
+
+fi
