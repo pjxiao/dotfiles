@@ -18,7 +18,8 @@ sudo apt-get update
 sudo apt-get install -y \
     git vim vim-nox byobu fonts-vlgothic ibus-mozc \
     linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
-    xsel python-pip python-dev keepass2 xdotool libpq5 libpq-dev
+    xsel python-pip python-dev keepass2 xdotool libpq5 libpq-dev w3m w3m-img \
+    postgresql-client
 
 sudo $(which pip) install mercurial ansible virtualenvwrapper
 
