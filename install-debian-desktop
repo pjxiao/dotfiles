@@ -32,3 +32,4 @@ grep -q '# Load dotfiles' $HOME/.bashrc || \
     echo -e '\n# Load dotfiles\nsource ~/dotfiles/.bashrc' >> $HOME/.bashrc
 grep -q '" Load dotfiles' $HOME/.vimrc || \
     echo -e '\n" Load dotfiles\nexe '"'source'"' $HOME . "/dotfiles/.vimrc"' >> $HOME/.vimrc
+ln -s ${HOME}/dotfiles/.inputrc ${HOME}/.inputrc || true
