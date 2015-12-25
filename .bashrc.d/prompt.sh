@@ -14,13 +14,15 @@ then
 
     if $(which hg 1>/dev/null 2>&1)
     then
+        # Escape system wide Python path
+        PYTHON=$(which python2)
         __hg_branch ()
         {
             path=$(pwd)
             while [ ${path} != '/' ]
             do
                 if [ -d "${path}/.hg" ]; then
-                    echo -n "($(python ${DOTFILES_DIR}/scripts/hg_repo.py))"
+                    echo -n "($(${PYTHON} ${DOTFILES_DIR}/scripts/hg_repo.py))"
                 fi
                 path=$(readlink -f "${path}/../")
             done
