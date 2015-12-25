@@ -1,5 +1,3 @@
-
-
 if [ -n "$PS1" ]
 then
     ps --no-headers | awk '{ print $4 }' | grep -q vim &&\
@@ -13,5 +11,21 @@ then
         }
        PS1='$(__git_branch)'$PS1
     fi
-fi
 
+    if $(which hg 1>/dev/null 2>&1)
+    then
+        __hg_branch ()
+        {
+            path=$(pwd)
+            while [ ${path} != '/' ]
+            do
+                if [ -d "${path}/.hg" ]; then
+                    echo -n "($(python ${DOTFILES_DIR}/scripts/hg_repo.py))"
+                fi
+                path=$(readlink -f "${path}/../")
+            done
+        }
+
+        PS1='$(__hg_branch)'$PS1
+    fi
+fi
