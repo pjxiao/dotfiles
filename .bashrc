@@ -116,7 +116,8 @@ fi
 
 
 
-bash_parts=$(dirname $BASH_SOURCE)/.bashrc.d
+DOTFILES_DIR=$(dirname $BASH_SOURCE)
+bash_parts=${DOTFILES_DIR}/.bashrc.d
 if [ -d "$bash_parts" ]; then
     for rc in `find $bash_parts -type f`
     do
