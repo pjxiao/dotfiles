@@ -19,7 +19,6 @@ then
         __hg_branch ()
         {
             local repo="$(__find_hg_repo $(pwd))"
-            echo $repo
             if [ -n "${repo}" ]; then
                 echo -n "($(${SYSTEM_PYTHON} ${DOTFILES_DIR}/scripts/hg_repo.py))"
             fi
