@@ -41,6 +41,21 @@ __repo_st()
     fi
 }
 
+pomodoro()
+{
+    local msg_start='Start Session'
+    local msg_break='Break time'
+    while :
+    do
+        notify-send 'Pomodoro' "${msg_start}" && \
+            echo "${msg_start}: $(date)" && \
+            sleep 25m && \
+            notify-send 'Pomodoro' "${msg_break}" && \
+            echo "${msg_break}: $(date)" && \
+            sleep 5m
+    done
+}
+
 
 alias rst=__repo_st
 alias rdf=__repo_diff
