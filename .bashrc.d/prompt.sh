@@ -27,4 +27,13 @@ then
 
         PS1='$(__hg_branch)'$PS1
     fi
+
+    __prompt_command ()
+    {
+        local pwd=$(pwd)
+        # PROMPT COMMAND
+    }
+
+
+    PROMPT_COMMAND="__prompt_command;$PROMPT_COMMAND"
 fi
