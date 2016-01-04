@@ -15,17 +15,14 @@ then
     if $(which hg 1>/dev/null 2>&1)
     then
         # Escape system wide Python path
-        PYTHON=$(which python2)
+        SYSTEM_PYTHON=$(which python2)
         __hg_branch ()
         {
-            path=$(pwd)
-            while [ ${path} != '/' ]
-            do
-                if [ -d "${path}/.hg" ]; then
-                    echo -n "($(${PYTHON} ${DOTFILES_DIR}/scripts/hg_repo.py))"
-                fi
-                path=$(readlink -f "${path}/../")
-            done
+            local repo="$(__find_hg_repo $(pwd))"
+            echo $repo
+            if [ -n "${repo}" ]; then
+                echo -n "($(${SYSTEM_PYTHON} ${DOTFILES_DIR}/scripts/hg_repo.py))"
+            fi
         }
 
         PS1='$(__hg_branch)'$PS1

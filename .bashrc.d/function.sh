@@ -57,5 +57,21 @@ pomodoro()
 }
 
 
+__find_hg_repo()
+{
+    path=$1
+    while [ ${path} != '/' ]
+    do
+        if [ -d "${path}/.hg" ]; then
+            echo ${path}
+            return 0
+        fi
+        path=$(readlink -f "${path}/../")
+    done
+
+    return 1
+}
+
+
 alias rst=__repo_st
 alias rdf=__repo_diff
