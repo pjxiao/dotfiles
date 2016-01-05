@@ -136,3 +136,8 @@ if [ -d "/home/xiao/google-cloud-sdk" ]; then
     source /home/xiao/google-cloud-sdk/completion.bash.inc
 
 fi
+
+# Load local rc file
+if [ -f "${HOME}/.bashrc.local" ]; then
+    source "${HOME}/.bashrc.local"
+fi
