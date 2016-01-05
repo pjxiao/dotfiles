@@ -20,7 +20,14 @@ then
         {
             local repo="$(__find_hg_repo $(pwd))"
             if [ -n "${repo}" ]; then
-                echo -n "($(${SYSTEM_PYTHON} ${DOTFILES_DIR}/scripts/hg_repo.py))"
+                # NOTE: /path/to/repo/.hg/branch contains branch name (Mercurial 3.6.2)
+                # :see also: - ``mercurial.dirstate.dirstate._branch()``
+                #            - ``vcprompt/src/hg.c#hg_get_info()``
+                if [ -f "${repo}/.hg/branch" ]; then
+                    echo -n "($(cat "${repo}/.hg/branch"))"
+                else
+                    echo -n "(default)"
+                fi
             fi
         }
 
