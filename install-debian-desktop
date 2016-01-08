@@ -6,10 +6,30 @@ which sudo || \
     echo "Logout and re-execute ./install" )
 
 # Register repositories
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+sudo gpg --keyserver pgpkeys.mit.edu --recv-key 3EE67F3D0FF405B2
+sudo gpg -a --export 3EE67F3D0FF405B2 | sudo apt-key add -
+
 cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
+# Auto-generated
 # Debian 8 "Jessie"
 deb http://httpredir.debian.org/debian/ jessie main contrib
 EOL
+
+cat <<EOL | sudo tee /etc/apt/sources.list.d/docker.list
+# Auto-generated
+# Docker (Debian 8 "Jessie")
+deb https://apt.dockerproject.org/repo debian-jessie main
+EOL
+
+cat <<EOL | sudo tee /etc/apt/sources.list.d/linux-mint.list
+# Auto-generated
+# Linux mint
+deb http://packages.linuxmint.com debian import
+EOL
+
+# Support HTTPS
+sudo apt-get install -y apt-transport-https
 
 # Update
 sudo apt-get update
@@ -19,9 +39,12 @@ sudo apt-get install -y \
     git vim vim-nox byobu fonts-vlgothic ibus-mozc \
     linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
     xsel python-pip python-dev keepass2 xdotool libpq5 libpq-dev w3m w3m-img \
-    postgresql-client libnotify-bin
+    postgresql-client libnotify-bin gnome-screensaver nkf html-xml-utils \
+    docker-engine firefox kpcli expect
 
-sudo $(which pip) install mercurial ansible virtualenvwrapper
+pip=$(which /usr/bin/pip2) || exit 1
+
+sudo ${pip} install -U mercurial ansible virtualenvwrapper
 
 # Download dotfiles
 [ -d "$HOME/dotfiles" ] || \

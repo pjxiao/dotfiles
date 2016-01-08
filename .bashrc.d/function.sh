@@ -13,13 +13,13 @@ respawn() {
 __repo_diff()
 {
     if [ -n "$(__git_branch)" ]; then
-        echo 'Git'
+        __echo_bold 'Git'
         git diff
         return
     fi
 
     if [ -n "$(__hg_branch)" ]; then
-        echo 'Mercurial'
+        __echo_bold 'Mercurial'
         hg diff
         return
     fi
@@ -29,13 +29,13 @@ __repo_diff()
 __repo_st()
 {
     if [ -n "$(__git_branch)" ]; then
-        echo 'Git'
+        __echo_bold 'Git'
         git status
         return
     fi
 
     if [ -n "$(__hg_branch)" ]; then
-        echo 'Mercurial'
+        __echo_bold 'Mercurial'
         hg status
         return
     fi
@@ -54,6 +54,12 @@ pomodoro()
             echo "${msg_break}: $(date)" && \
             sleep 5m
     done
+}
+
+
+__echo_bold ()
+{
+    echo "$(tput bold)${*}$(tput sgr0)"
 }
 
 

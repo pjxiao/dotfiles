@@ -111,6 +111,9 @@ let g:vim_markdown_initial_foldlevel=1024
 " vim-less  {{{
 NeoBundle 'groenewege/vim-less'
 " }}}
+" Flake8  {{{
+NeoBundle 'Flake8-vim'
+" }}}
 
 call neobundle#end()
 
