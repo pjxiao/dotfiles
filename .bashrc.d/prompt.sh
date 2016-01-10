@@ -1,6 +1,6 @@
 if [ -n "$PS1" ]
 then
-    ps --no-headers | awk '{ print $4 }' | grep -q vim &&\
+    ps --no-header >/dev/null 2>&1 &&  ps --no-headers | awk '{ print $4 }' | grep -q vim &&\
         PS1="(\[\e[;32m\]VIM\[\e[00m\])"$PS1
 
     if $(grep -qE '\s__git_ps1$' <(declare -F))
