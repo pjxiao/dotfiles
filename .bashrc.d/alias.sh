@@ -15,6 +15,7 @@ alias yst='yesterday'
 alias open-tunnel='start-stop-daemon --start --background --make-pidfile --pidfile /var/run/sshtunnel.pid --exec /usr/local/bin/sshtunnel -- '
 alias close-tunnel='start-stop-daemon --stop --pidfile /var/run/sshtunnel.pid'
 alias pingle='ping google.com'
+alias clipboard='xsel --clipboard --input'
 
 # Git
 git_status='git status -bs'
