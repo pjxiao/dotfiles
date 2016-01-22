@@ -10,6 +10,21 @@ respawn() {
 }
 
 
+__repo_checkout()
+{
+    if [ -n "$(__git_branch)" ]; then
+        __echo_bold 'Git'
+        git checkout $*
+        return
+    fi
+
+    if [ -n "$(__hg_branch)" ]; then
+        __echo_bold 'Mercurial'
+        hg checkout $*
+        return
+    fi
+}
+
 __repo_diff()
 {
     if [ -n "$(__git_branch)" ]; then
@@ -30,16 +45,33 @@ __repo_st()
 {
     if [ -n "$(__git_branch)" ]; then
         __echo_bold 'Git'
-        git status
+        git status $*
         return
     fi
 
     if [ -n "$(__hg_branch)" ]; then
         __echo_bold 'Mercurial'
-        hg status
+        hg status $*
         return
     fi
 }
+
+
+__repo_branches()
+{
+    if [ -n "$(__git_branch)" ]; then
+        __echo_bold 'Git'
+        git branch $*
+        return
+    fi
+
+    if [ -n "$(__hg_branch)" ]; then
+        __echo_bold 'Mercurial'
+        hg branches $*
+        return
+    fi
+}
+
 
 pomodoro()
 {
@@ -81,3 +113,5 @@ __find_hg_repo()
 
 alias rst=__repo_st
 alias rdf=__repo_diff
+alias rco=__repo_checkout
+alias rbr=__repo_branches
