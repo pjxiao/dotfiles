@@ -114,6 +114,10 @@ NeoBundle 'groenewege/vim-less'
 " Flake8  {{{
 NeoBundle 'Flake8-vim'
 " }}}
+" colorscheme  {{{
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'altercation/vim-colors-solarized'
+" }}}
 
 call neobundle#end()
 

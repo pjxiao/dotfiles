@@ -2,7 +2,12 @@
 set nocompatible
 
 " カラースキーマ
-colorscheme desert
+try
+  colorscheme hybrid
+catch
+  colorscheme desert
+endtry
+
 
 " 行表示
 set number
