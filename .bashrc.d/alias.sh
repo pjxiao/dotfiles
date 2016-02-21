@@ -9,7 +9,7 @@ __alias ()
     cat <<EOL > "${bin_dir}/${cmd}"
 #!/bin/bash
 export PATH=${PATH}
-${script}
+${script} \${*}
 EOL
     chmod +x "${bin_dir}/${cmd}"
 }
@@ -55,7 +55,7 @@ alias glgr="git log --graph --date-order --pretty=format:'%Cblue%h %Cgreen%ci %C
 
 # Setup & Clean-up
 unalias alias
-rm -rf "${HOME}/.local/bin"
-mv "${bin_dir}" "${HOME}/.local/bin"
-export PATH="${HOME}/.local/bin":$PATH
+rm -rf "${HOME}/.local/aliases"
+mv "${bin_dir}" "${HOME}/.local/aliases"
+export PATH="${HOME}/.local/aliases":$PATH
 unset bin_dir
