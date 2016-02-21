@@ -45,7 +45,8 @@ sudo apt-get install -y \
     linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
     python-pip python-dev libpq5 libpq-dev w3m w3m-img \
     postgresql-client nkf html-xml-utils \
-    docker-engine kpcli expect
+    docker-engine kpcli expect python-keyring mercurial-keyring \
+    nginx samba gauche rlwrap
 
 pip=$(which /usr/bin/pip2) || exit 1
 
