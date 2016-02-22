@@ -2,11 +2,8 @@
 set nocompatible
 
 " カラースキーマ
-try
-  colorscheme hybrid
-catch
-  colorscheme desert
-endtry
+set background=dark
+colorscheme solarized
 
 
 " 行表示

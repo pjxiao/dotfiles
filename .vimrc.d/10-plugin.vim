@@ -114,9 +114,20 @@ NeoBundle 'groenewege/vim-less'
 " Flake8  {{{
 NeoBundle 'Flake8-vim'
 " }}}
+" Python {{{
+NeoBundle 'hdima/python-syntax'
+let python_highlight_all = 1
+let python_highlight_builtins = 1
+NeoBundle "hynek/vim-python-pep8-indent"
+" }}}
 " colorscheme  {{{
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'twilight'
+" }}}
+" SQL  {{{
+" NeoBundle 'sql.vim'
+" NeoBundle 'sqlcomplete.vim'
 " }}}
 
 call neobundle#end()

@@ -73,10 +73,26 @@ __repo_branches()
 }
 
 
+__repo_fetch()
+{
+    if [ -n "$(__git_branch)" ]; then
+        __echo_bold 'Git'
+        git fetch $*
+        return
+    fi
+
+    if [ -n "$(__hg_branch)" ]; then
+        __echo_bold 'Mercurial'
+        hg pull $*
+        return
+    fi
+}
+
+
 pomodoro()
 {
-    local msg_start='Start Session'
-    local msg_break='Break time'
+    local msg_start='Start Session: What are you going to do?'
+    local msg_break='Break time: What did you do?'
     while :
     do
         notify-send 'Pomodoro' "${msg_start}" && \
@@ -111,7 +127,34 @@ __find_hg_repo()
 }
 
 
+__restart_ime_ibus ()
+{
+    set -x
+    kill $(ps -Cmozc_server --no-headers -opid) && ibus-daemon -rdx
+    set +x
+}
+
+
+__format_sql ()
+{
+    [ -f '/usr/local/bin/sqlformat' ] || return 1
+
+    local fmt='/usr/local/bin/sqlformat -rk upper  -'
+
+    if [ -n "$*" ]; then
+        echo $* | ${fmt}
+    else
+        ${fmt}
+    fi
+}
+
+
 alias rst=__repo_st
 alias rdf=__repo_diff
 alias rco=__repo_checkout
 alias rbr=__repo_branches
+alias rft=__repo_fetch
+alias rfe=__repo_fetch
+alias 'restart-ime'=__restart_ime_ibus
+alias format-sql=__format_sql
+alias fmt-sql=__format_sql

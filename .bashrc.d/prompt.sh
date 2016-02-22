@@ -3,11 +3,19 @@ then
     ps --no-header >/dev/null 2>&1 &&  ps --no-headers | awk '{ print $4 }' | grep -q vim &&\
         PS1="(\[\e[;32m\]VIM\[\e[00m\])"$PS1
 
+    __print_branch ()
+    {
+        # marks: Ꝩ   𐌖  𝛄
+        local mark='Ꝩ'
+        echo -n "(${mark} ${1})"
+    }
+
     if $(grep -qE '\s__git_ps1$' <(declare -F))
     then
         __git_branch ()
         {
-            __git_ps1 | sed -e 's/^\s\+//'
+            branch=$(__git_ps1 | sed -e "s/[[:space:]\r]//g" | sed -e 's/^(\+//' | sed -e 's/)\+$//' | tr -d "\r")
+            [ -n "${branch}" ] && __print_branch ${branch}
         }
        PS1='$(__git_branch)'$PS1
     fi
@@ -24,10 +32,11 @@ then
                 # :see also: - ``mercurial.dirstate.dirstate._branch()``
                 #            - ``vcprompt/src/hg.c#hg_get_info()``
                 if [ -f "${repo}/.hg/branch" ]; then
-                    echo -n "($(cat "${repo}/.hg/branch"))"
+                    local branch=$(cat "${repo}/.hg/branch")
                 else
-                    echo -n "(default)"
+                    local branch=default
                 fi
+                __print_branch ${branch}
             fi
         }
 
