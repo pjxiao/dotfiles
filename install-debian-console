@@ -1,7 +1,7 @@
-#!/bin/bash -x
+#!/bin/bash -xe
 
 # Update
-sudo apt-get update
+[ 1 -gt $(find /var/cache/apt/pkgcache.bin -mtime -1 | wc -l) ] && sudo apt-get update
 
 # Check whether ``sudo`` is installed
 which sudo || \
@@ -9,9 +9,11 @@ which sudo || \
     echo "Logout and re-execute ./install" )
 
 # Register repositories
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-sudo gpg --keyserver pgpkeys.mit.edu --recv-key 3EE67F3D0FF405B2
-sudo gpg -a --export 3EE67F3D0FF405B2 | sudo apt-key add -
+sudo bash -c '
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    gpg --keyserver pgpkeys.mit.edu --recv-key 3EE67F3D0FF405B2
+    gpg -a --export 3EE67F3D0FF405B2 | apt-key add -
+'
 
 cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
 # Auto-generated
@@ -43,7 +45,8 @@ sudo apt-get install -y \
     linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
     python-pip python-dev libpq5 libpq-dev w3m w3m-img \
     postgresql-client nkf html-xml-utils \
-    docker-engine kpcli expect rlwrap
+    docker-engine kpcli expect python-keyring mercurial-keyring \
+    nginx samba gauche rlwrap
 
 pip=$(which /usr/bin/pip2) || exit 1
 
