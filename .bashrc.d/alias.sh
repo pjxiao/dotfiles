@@ -1,22 +1,3 @@
-# Prepare
-bin_dir=$(mktemp -d)
-
-__alias ()
-{
-    local cmd="$(echo "$1" | cut -d= -f1)"
-    local script="$(echo "$1" | cut -d= -f2-)"
-
-    cat <<EOL > "${bin_dir}/${cmd}"
-#!/bin/bash
-export PATH=${PATH}
-${script} \${*}
-EOL
-    chmod +x "${bin_dir}/${cmd}"
-}
-
-alias alias="__alias"
-
-
 # misc
 alias docker='sudo docker'
 alias dl='docker ps -l -q'
@@ -55,11 +36,3 @@ alias gdf='git diff'
 alias gcm='git commit -m'
 alias glg="git log --stat"
 alias glgr="git log --graph --date-order --pretty=format:'%Cblue%h %Cgreen%ci %Cred%an %Cblue%m %Creset%s %Cred%d'"
-
-
-# Setup & Clean-up
-unalias alias
-rm -rf "${HOME}/.local/aliases"
-mv "${bin_dir}" "${HOME}/.local/aliases"
-export PATH="${HOME}/.local/aliases":$PATH
-unset bin_dir
