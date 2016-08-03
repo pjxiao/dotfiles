@@ -7,6 +7,9 @@ alias mv='mv -vi'
 alias cp='cp -vi'
 alias diff='colordiff -u'
 
+# vi compat
+alias ':q'='exit'
+
 # Network
 alias wget='wget --content-disposition --max-redirect 10 -c -t0'
 alias curl='curl -c ~/.curlcookie -b ~/.curlcookie -L'

@@ -2,8 +2,9 @@
 set nocompatible
 
 " カラースキーマ
+let g:solarized_termcolors = 256
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 
 " 行表示
@@ -51,3 +52,9 @@ set foldmethod=marker
 if has("syntax")
     syntax on
 endif
+
+" 履歴をたくさん残す
+set history=10000
+
+" 補完方法
+set wildmode=longest,list

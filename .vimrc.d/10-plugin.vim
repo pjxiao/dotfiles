@@ -72,7 +72,9 @@ elseif python_major_version == 3 && has('python3')
     python3 None
 endif
 NeoBundle 'jmcantrell/vim-virtualenv'
-NeoBundle 'davidhalter/jedi-vim'
+" NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'nakamuray/jedi-vim'
+
 " }}}
 " Django {{{
 NeoBundle 'lambdalisue/vim-django-support'
@@ -128,6 +130,9 @@ NeoBundle 'twilight'
 " SQL  {{{
 " NeoBundle 'sql.vim'
 " NeoBundle 'sqlcomplete.vim'
+" }}}
+" reST {{{
+NeoBundle 'pjxiao/riv.vim'
 " }}}
 
 call neobundle#end()

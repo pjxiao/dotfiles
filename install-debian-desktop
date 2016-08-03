@@ -17,6 +17,7 @@ sudo sh -exc '
     gpg -a --export 07DC563D1F41B907 | sudo apt-key add -
     gpg -a --export 0F164EEB         | sudo apt-key add -
     apt-get install -y software-properties-common
+    dpkg -l gyazo >/dev/null 2>&1 || curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash
 '
 
 cat <<EOL | sudo tee /etc/apt/sources.list.d/multimedia.list
@@ -64,12 +65,14 @@ sudo apt-get install -y \
     xsel python-pip python-dev keepass2 xdotool libpq5 libpq-dev w3m w3m-img \
     postgresql-client libnotify-bin gnome-screensaver nkf html-xml-utils \
     docker-engine firefox kpcli expect zip gauche \
-    numix-gtk-theme numix-folders numix-icon-theme rlwrap
+    numix-gtk-theme numix-folders numix-icon-theme rlwrap \
+    winetricks wine64-tools cabextract redis-tools gyazo libcanberra-gtk-module \
+    tree libncurses5-dev socat devscripts
 
 pip='/usr/local/bin/pip2'
 [ -f "${pip}" ] || exit 1
 
-sudo ${pip} install -U mercurial ansible virtualenvwrapper
+sudo ${pip} install -U mercurial ansible virtualenvwrapper docker-compose
 
 # Download dotfiles
 [ -d "$HOME/dotfiles" ] || \

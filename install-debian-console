@@ -46,7 +46,7 @@ sudo apt-get install -y \
     python-pip python-dev libpq5 libpq-dev w3m w3m-img \
     postgresql-client nkf html-xml-utils \
     docker-engine kpcli expect python-keyring mercurial-keyring \
-    nginx samba gauche rlwrap
+    nginx samba gauche rlwrap cabextract
 
 pip=$(which /usr/bin/pip2) || exit 1
 

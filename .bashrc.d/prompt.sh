@@ -6,8 +6,10 @@ then
     __print_branch ()
     {
         # marks: Ꝩ   𐌖  𝛄
-        local mark='Ꝩ'
-        echo -n "(${mark} ${1})"
+        local mark=''
+        echo -n "(${mark}${1})"
+        echo "${1}" | grep -qE '^[mt][0-9]+' && \
+            echo -n "${1}" | perl -pe 's/^[mt]([0-9]+).*/(#\1)/' | tr -d "\n"
     }
 
     if $(grep -qE '\s__git_ps1$' <(declare -F))
