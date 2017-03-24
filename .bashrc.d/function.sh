@@ -137,9 +137,10 @@ __restart_ime_ibus ()
 
 __format_sql ()
 {
-    [ -f '/usr/local/bin/sqlformat' ] || return 1
+    sqlformat=$(which 'sqlformat')
+    [ -z "${sqlformat}" ] || return 1
 
-    local fmt='/usr/local/bin/sqlformat -rk upper  -'
+    local fmt="$sqlformat -rk upper  -"
 
     if [ -n "$*" ]; then
         echo $* | ${fmt}
