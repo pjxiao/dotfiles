@@ -1,65 +1,34 @@
 #!/bin/bash -xe
 
+# Check whether ``sudo`` is installed
+# This check MUST be put first of all procedures
+which sudo || \
+    ( su -c "apt-get install -y sudo && usermod -aG sudo $(whoami)" &&\
+    echo "Logout and re-execute ./install" || true && exit 1)
+
+
+# Script global variables
+INSTALLER_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+BASHRC_PART_PATH=$(t=$(mktemp) && chmod 600 $t && echo $t)
+
+
 # Update
 [ 1 -gt $(find /var/cache/apt/pkgcache.bin -mtime -1 | wc -l) ] && sudo apt-get update
 
-# Check whether ``sudo`` is installed
-which sudo || \
-    ( su -c "apt-get install -y sudo && usermod -aG sudo $(whoami)" &&\
-    echo "Logout and re-execute ./install" )
+. ./install.d/00-helper.bash
+. ./install.d/10-repository.bash
+. ./install.d/20-packages.bash
+. ./install.d/30-python.bash
+. ./install.d/90-dotfiles.bash
 
-# Register repositories
-sudo bash -c '
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-    gpg --keyserver pgpkeys.mit.edu --recv-key 3EE67F3D0FF405B2
-    gpg -a --export 3EE67F3D0FF405B2 | apt-key add -
-'
 
-cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
-# Auto-generated
-# Debian 8 "Jessie"
-deb http://httpredir.debian.org/debian/ jessie main contrib
-EOL
+# REMAIN BREW CODES IN THIS FILE
+# The codes run finall steps using varibles declared in this file.
 
-cat <<EOL | sudo tee /etc/apt/sources.list.d/docker.list
-# Auto-generated
-# Docker (Debian 8 "Jessie")
-deb https://apt.dockerproject.org/repo debian-jessie main
-EOL
+# Generate a part of bashrc
+part="${HOME}/.provisioned_bashrc_part"
+mv -fv ${BASHRC_PART_PATH} ${part}
 
-cat <<EOL | sudo tee /etc/apt/sources.list.d/linux-mint.list
-# Auto-generated
-# Linux mint
-deb http://packages.linuxmint.com debian import
-EOL
-
-# Support HTTPS
-sudo apt-get install -y apt-transport-https
-
-# Update
-sudo apt-get update
-
-# Install packages
-sudo apt-get install -y \
-    git vim vim-nox byobu fonts-vlgothic \
-    linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') virtualbox vagrant \
-    python-pip python-dev libpq5 libpq-dev w3m w3m-img \
-    postgresql-client nkf html-xml-utils \
-    docker-engine kpcli expect python-keyring mercurial-keyring \
-    nginx samba gauche rlwrap cabextract \
-    openjdk-7-jdk openjdk-7-jre
-
-pip=$(which /usr/bin/pip2) || exit 1
-
-sudo ${pip} install -U Mercurial ansible virtualenvwrapper
-
-# Download dotfiles
-[ -d "$HOME/dotfiles" ] || \
-    git clone https://github.com/pjxiao/dotfiles "$HOME/dotfiles"
-
-# Configure dotfiles
-grep -q '# Load dotfiles' $HOME/.bashrc || \
-    echo -e '\n# Load dotfiles\nsource ~/dotfiles/.bashrc' >> $HOME/.bashrc
-grep -q '" Load dotfiles' $HOME/.vimrc || \
-    echo -e '\n" Load dotfiles\nexe '"'source'"' $HOME . "/dotfiles/.vimrc"' >> $HOME/.vimrc
-ln -s ${HOME}/dotfiles/.inputrc ${HOME}/.inputrc || true
+# Configure bashrc
+echo "source ${part}" | \
+    append_marker_leaded_lines '# Load provisioned' ${HOME}/.bashrc
