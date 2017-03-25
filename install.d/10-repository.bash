@@ -19,7 +19,8 @@ EOL
 
 cat <<EOL | sudo tee /etc/apt/sources.list.d/linux-mint.list
 # Auto-generated
+# MUST NOT use Linux mint's repository which is unreliable
 # Linux mint
-deb http://packages.linuxmint.com debian import
+# deb http://packages.linuxmint.com debian import
 EOL
 
