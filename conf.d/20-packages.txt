@@ -15,6 +15,7 @@ openjdk-7-jdk
 openjdk-7-jre
 postgresql-client
 rlwrap
+redis-tools
 samba
 socat
 tree
