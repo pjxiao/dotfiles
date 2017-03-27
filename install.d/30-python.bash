@@ -24,7 +24,7 @@ touch ${provisioned_venvs_dir}/blackhole/bin/pip
 chmod +x ${provisioned_venvs_dir}/blackhole/bin/pip
 
 # Install user-wide enabled tools
-${provisioned_venvs_dir}/py3/bin/pip install -U virtualenvwrapper
+${provisioned_venvs_dir}/py3/bin/pip install -U virtualenv virtualenvwrapper docker-compose
 ${provisioned_venvs_dir}/py2/bin/pip install -U Mercurial ansible
 
 # Append to bashrc
@@ -36,6 +36,8 @@ export PATH="\${PATH}:${provisioned_venvs_dir}/py2/bin"
 
 # Python:virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=${provisioned_venvs_dir}/py3/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=${provisioned_venvs_dir}/py3/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_CLONE=${provisioned_venvs_dir}/py3/bin/virtualenv-clone
 . virtualenvwrapper.sh
 EOL
 unset provisioned_venvs_dir
