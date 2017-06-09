@@ -1,0 +1,24 @@
+#!/bin/bash -x
+
+exec 1> >(logger -s -t $(basename $0)) 2>&1
+
+if (vim --serverlist | grep -q 'VIMWRAPPER') ; then
+    vim --servername VIMWRAPPER --remote-send "<Esc>:vsplit<Space>${1}<CR>"
+    # if (ps -Ctmux) ; then
+    #     vim --servername VIMWRAPPER --remote-send '<Esc>:!tmux<Space>select-window<Space$(tmux<Space>display-message<Space>-p "#I")><CR>'
+    # fi
+else
+    # If tmux is running, then launch vim in in tmux
+    if (ps -Ctmux) ; then
+        tmux new-window "vim --servername VIMWRAPPER ${1}"
+    else
+        /usr/bin/gnome-terminal -x vim --servername VIMWRAPPER ${1}
+    fi
+
+    for _ in $(seq 10000)  # wait for launch vim
+    do
+        (vim --serverlist | grep -q 'VIMWRAPPER') && break
+        sleep 0.05
+    done
+fi
+vim --servername VIMWRAPPER --remote-send '<Esc>:!xdotool<Space>windowactivate<Space>$WINDOWID<CR><CR>'
