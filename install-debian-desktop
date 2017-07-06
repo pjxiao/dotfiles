@@ -17,6 +17,7 @@ sudo apt-get update
 
 # Install packages
 sudo apt-get install -y \
+    vim-gnome \
     fonts-vlgothic ibus-mozc \
     xsel keepass2 xdotool \
     libcanberra-gtk-module

@@ -5,6 +5,7 @@ expect
 fonts-vlgothic
 gauche
 git
+hg-fast-export
 html-xml-utils
 kpcli
 libpq-dev
