@@ -24,3 +24,4 @@ cat <<EOL | sudo tee /etc/apt/sources.list.d/linux-mint.list
 # deb http://packages.linuxmint.com debian import
 EOL
 
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
