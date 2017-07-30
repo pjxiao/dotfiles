@@ -10,6 +10,7 @@ html-xml-utils
 kpcli
 libpq-dev
 libpq5
+lxc
 nginx
 nkf
 openjdk-7-jdk
