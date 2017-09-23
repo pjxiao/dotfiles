@@ -58,3 +58,6 @@ set history=10000
 
 " 補完方法
 set wildmode=longest,list
+
+" Turnon omni complete
+set omnifunc=syntaxcomplete#Complete

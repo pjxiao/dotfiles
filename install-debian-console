@@ -3,19 +3,24 @@
 # Check whether ``sudo`` is installed
 # This check MUST be put first of all procedures
 which sudo || \
-    ( su -c "apt-get install -y sudo && usermod -aG sudo $(whoami)" &&\
+    ( su -c "apt-get update && apt-get install -y sudo git && usermod -aG sudo $(whoami)" &&\
     echo "Logout and re-execute ./install" || true && exit 1)
 
 
 # Script global variables
 INSTALLER_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 BASHRC_PART_PATH=$(t=$(mktemp) && chmod 600 $t && echo $t)
-
+DEBIAN_VER="$(cut -d. -f1 /etc/debian_version)"
+case "${DEBIAN_VER}" in
+    '8') DEBIAN_REL='jessie';;
+    '9') DEBIAN_REL='stretch';;
+esac
 
 # Update
 [ 1 -gt $(find /var/cache/apt/pkgcache.bin -mtime -1 | wc -l) ] && sudo apt-get update
 
 . ./install.d/00-helper.bash
+. ./install.d/00-prerequired.bash
 . ./install.d/10-repository.bash
 . ./install.d/20-packages.bash
 . ./install.d/30-python.bash

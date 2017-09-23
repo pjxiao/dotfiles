@@ -7,21 +7,16 @@ sudo bash -c '
 
 cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
 # Auto-generated
-# Debian 8 "Jessie"
-deb http://httpredir.debian.org/debian/ jessie main contrib
+# Contrib (Debian ${DEBIAN_VER} "${DEBIAN_REL}")
+deb http://httpredir.debian.org/debian/ ${DEBIAN_REL} main contrib
 EOL
 
 cat <<EOL | sudo tee /etc/apt/sources.list.d/docker.list
 # Auto-generated
-# Docker (Debian 8 "Jessie")
-deb https://apt.dockerproject.org/repo debian-jessie main
-EOL
-
-cat <<EOL | sudo tee /etc/apt/sources.list.d/linux-mint.list
-# Auto-generated
-# MUST NOT use Linux mint's repository which is unreliable
-# Linux mint
-# deb http://packages.linuxmint.com debian import
+# Docker (Debian ${DEBIAN_VER} "${DEBIAN_REL}")
+deb https://apt.dockerproject.org/repo debian-${DEBIAN_REL} main
 EOL
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+sudo apt-get update
