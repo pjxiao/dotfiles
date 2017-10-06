@@ -2,26 +2,13 @@
 
 . ./install-debian-console
 
-cat <<EOL | sudo tee /etc/apt/sources.list.d/numix.list
-# Auto-generated
-# Numix
-deb http://ppa.launchpad.net/numix/ppa/ubuntu trusty main
-deb-src http://ppa.launchpad.net/numix/ppa/ubuntu trusty main
-EOL
-
-# Support HTTPS
-sudo apt-get install -y apt-transport-https
-
-# Update
-sudo apt-get update
-
 # Install packages
 sudo apt-get install -y \
-    vim-gnome \
     fonts-vlgothic ibus-mozc \
-    xsel keepass2 xdotool \
-    libcanberra-gtk-module
+    numix-gtk-theme numix-icon-theme \
+    vim-gui-common xdotool \
+    dia dia-gnome
+    keepass2
 
-# Install packages force
-sudo apt-get install -y --force-yes \
-    numix-gtk-theme numix-folders numix-icon-theme
+# TODO: For Mac Book Pro
+# sudo apt-get install -y firmware-amd-graphics xserver-xorg-video-amdgpu

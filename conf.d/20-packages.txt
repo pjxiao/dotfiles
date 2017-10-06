@@ -1,12 +1,16 @@
 byobu
 cabextract
+clang
+curl
 docker-engine
+dstat
 expect
 fonts-vlgothic
 gauche
 golang
 hg-fast-export
 html-xml-utils
+jq
 kpcli
 libpq-dev
 libpq5
