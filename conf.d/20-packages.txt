@@ -10,12 +10,15 @@ gauche
 golang
 hg-fast-export
 html-xml-utils
+img2pdf
 jq
 kpcli
 libpq-dev
 libpq5
 nginx
 nkf
+pandoc
+poppler-utils
 postgresql-client
 redis-tools
 rlwrap
