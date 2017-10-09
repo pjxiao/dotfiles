@@ -24,8 +24,12 @@ touch ${provisioned_venvs_dir}/blackhole/bin/pip
 chmod +x ${provisioned_venvs_dir}/blackhole/bin/pip
 
 # Install user-wide enabled tools
-${provisioned_venvs_dir}/py3/bin/pip install -U virtualenv virtualenvwrapper docker-compose
+${provisioned_venvs_dir}/py3/bin/pip install -U \
+    virtualenv virtualenvwrapper \
+    docker-compose \
+    jupyter pandas sqlalchemy psycopg2 matplotlib
 ${provisioned_venvs_dir}/py2/bin/pip install -U Mercurial ansible
+
 
 # Append to bashrc
 cat <<EOL >> ${BASHRC_PART_PATH}
