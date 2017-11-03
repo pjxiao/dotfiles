@@ -24,6 +24,7 @@ esac
 . ./install.d/10-repository.bash
 . ./install.d/20-packages.bash
 . ./install.d/30-python.bash
+. ./install.d/40-vim.bash
 . ./install.d/80-ssh-agent.bash
 . ./install.d/90-dotfiles.bash
 
