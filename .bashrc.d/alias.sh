@@ -5,7 +5,6 @@ alias l='ls -laF --color'
 alias rm='rm -vi'
 alias mv='mv -vi'
 alias cp='cp -vi'
-alias diff='colordiff -u'
 alias ssh-add="ssh-add -t $(expr 60 \* 60 \* 5)"
 
 # vi compat
