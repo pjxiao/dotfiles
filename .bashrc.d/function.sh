@@ -149,6 +149,22 @@ __format_sql ()
     fi
 }
 
+ss ()
+{
+    local dir=${SS_DIR:-"${HOME}/Pictures"}
+    local bin=${SS_BIN:-"gnome-screenshot"}
+    local current="$(
+        find ${dir} -regex '.*/ss_[0-9]+_[0-9]+.*' |\
+            grep -oP '(?<=/ss_)[0-9]+' |\
+            sed -e 's/^0*//' |\
+            sort -rn | head -1
+    )"
+    local idx=$((${current} + 1))
+    local dt=$(date +%Y-%m-%dT%H.%M.%S)
+    ${bin} -f "${dir}/$(printf 'ss_%03d_%s.png' ${idx} ${dt})" "${@}"
+}
+
+
 
 alias rst=__repo_st
 alias rdf=__repo_diff
