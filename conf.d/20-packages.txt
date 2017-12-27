@@ -4,6 +4,7 @@ clang
 curl
 docker-engine
 dstat
+dnsutils
 expect
 fonts-vlgothic
 gauche
@@ -23,7 +24,9 @@ postgresql-client
 redis-tools
 rlwrap
 samba
+snapd
 socat
+tcpdump
 tree
 vim
 vim-nox
