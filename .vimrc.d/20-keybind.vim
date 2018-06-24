@@ -15,4 +15,10 @@ nnoremap <C-H> :tabp <CR>
 
 map <C-g> :Gtags 
 
+" ハイライトを解除
 nmap <ESC><ESC> :nohlsearch<CR>:set nopaste<CR><ESC>
+
+" 検索時にジャンプさせない
+" cf. https://stackoverflow.com/a/4257175
+nnoremap * *``
+nnoremap # #``

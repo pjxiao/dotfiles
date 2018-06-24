@@ -18,3 +18,10 @@ let g:syntastic_python_checkers = ['flake8']
 " =============
 let python_highlight_all = 1
 let python_highlight_builtins = 1
+
+" camelcasemotion
+" ===============
+" cf. http://nanasi.jp/articles/vim/camelcasemotion_vim.html
+:map <silent> w <Plug>CamelCaseMotion_w
+:map <silent> b <Plug>CamelCaseMotion_b
+:map <silent> e <Plug>CamelCaseMotion_e

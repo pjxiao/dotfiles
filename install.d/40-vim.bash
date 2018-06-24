@@ -64,4 +64,12 @@ test -d ${_bundle_dir}/vim-python-pep8-indent || \
         ${_bundle_dir}/vim-python-pep8-indent
 
 
+# added at 2018-06-24
+test -d ${_bundle_dir}/camelcasemotion || \
+    git clone \
+        --depth=1 \
+        https://github.com/vim-scripts/camelcasemotion \
+        ${_bundle_dir}/camelcasemotion
+
+
 unset _bundle_dir
