@@ -1,4 +1,4 @@
-# Install packages
+# Install packages via apt
 sudo apt-get install -y \
     linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') \
     $(cat "${INSTALLER_DIR}/conf.d/20-packages.txt" | grep -vE '^#') \
