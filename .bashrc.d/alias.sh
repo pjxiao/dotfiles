@@ -1,6 +1,4 @@
 # misc
-alias docker='sudo docker'
-alias dl='docker ps -l -q'
 alias l='ls -laF --color'
 alias rm='rm -vi'
 alias mv='mv -vi'
@@ -24,8 +22,6 @@ alias today-iso='date +"%Y-%m-%d"'
 alias yesterday-iso='date +"%Y-%m-%d"'
 alias yst-iso='yesterday-iso'
 alias unixtime='date +"%s"'
-alias open-tunnel='start-stop-daemon --start --background --make-pidfile --pidfile /var/run/sshtunnel.pid --exec /usr/local/bin/sshtunnel -- '
-alias close-tunnel='start-stop-daemon --stop --pidfile /var/run/sshtunnel.pid'
 alias pingle='ping google.com'
 which xsel >/dev/null 2>&1   && alias clipboard='xsel --clipboard --input'
 which rlwrap >/dev/null 2>&1 && alias gosh='rlwrap gosh'
@@ -38,4 +34,4 @@ unset __git_status
 alias gdf='git diff'
 alias gcm='git commit -m'
 alias glg="git log --stat"
-alias glgr="git log --graph --date-order --pretty=format:'%Cblue%h %Cgreen%ci %Cred%an %Cblue%m %Creset%s %Cred%d'"
+alias glgr="git log --graph --topo-order --date='format:%Y-%m-%d %H:%M:%S' --pretty=format:'%Cblue%h %Cgreen%ad %Cred%an %Cblue%m %Creset%<(30,trunc)%s %Cred%d'"
