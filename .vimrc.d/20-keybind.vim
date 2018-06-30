@@ -22,3 +22,6 @@ nmap <ESC><ESC> :nohlsearch<CR>:set nopaste<CR><ESC>
 " cf. https://stackoverflow.com/a/4257175
 nnoremap * *``
 nnoremap # #``
+
+" バッファ一覧をQuickFixウィンドウで開く
+cabbrev ls ListBuffers
