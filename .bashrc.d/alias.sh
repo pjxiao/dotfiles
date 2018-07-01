@@ -5,6 +5,11 @@ alias mv='mv -vi'
 alias cp='cp -vi'
 alias ssh-add="ssh-add -t $(expr 60 \* 60 \* 5)"
 
+# prevent buffering
+alias tr='stdbuf -o0 tr'
+alias grep='stdbuf -o0 grep'
+alias sed='stdbuf -o0 sed'
+
 # vi compat
 alias ':q'='exit'
 
