@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# +----------------------+
+# | vimdiff              |
+# +======================+
+# | ${REMOTE} | ${LOCAL} |
+# +-----------+----------+
+# |      ${MERGED}       |
+# +----------------------+
+
+LOCAL=${1}
+REMOTE=${2}
+MERGED=${3}
+
+vimdiff \
+    -c "rightbelow vs ${LOCAL} | set scrollbind | wincmd j | /[<=>]\{7\}" \
+    -o \
+    ${REMOTE} ${MERGED}

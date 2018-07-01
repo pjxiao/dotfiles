@@ -1,0 +1,8 @@
+[alias]
+	co = checkout
+[core]
+	excludesfile = /path/to/.gitignore
+[merge]
+	tool = mergetool
+[mergetool "mergetool"]
+	cmd = /path/to/dotfiles/scripts/mergetool $LOCAL $REMOTE $MERGED
