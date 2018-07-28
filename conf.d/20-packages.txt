@@ -21,6 +21,7 @@ nkf
 pandoc
 poppler-utils
 postgresql-client
+redis-server
 redis-tools
 rlwrap
 samba

@@ -46,6 +46,7 @@ def QFPytest_collect_failures(tree: ElementTree):
     assert root.tag.lower() == 'testsuite'
     for case in root.iter('testcase'):
         failure = case.find('./failure')
+        error = case.find('./error')
         file = case.attrib.get('file', '')
         line = int(case.attrib.get('line', '0')) + 1
 
@@ -53,6 +54,18 @@ def QFPytest_collect_failures(tree: ElementTree):
             messages = list(dropwhile(
                 lambda l: not l.startswith('E '),
                 failure.text.split('\n'),
+            )) or ['E ' + 'UNK']
+
+            yield '{file}, {line}, {message}\n'.format(
+                file=file,
+                line=line,
+                message=messages[0].lstrip('E').lstrip(' '),
+            )
+
+        if error is not None:
+            messages = list(dropwhile(
+                lambda l: not l.startswith('E '),
+                error.text.split('\n'),
             )) or ['E ' + 'UNK']
 
             yield '{file}, {line}, {message}\n'.format(
