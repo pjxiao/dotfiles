@@ -17,6 +17,6 @@ cat <<EOL | sudo tee /etc/apt/sources.list.d/docker.list
 deb https://apt.dockerproject.org/repo debian-${DEBIAN_REL} main
 EOL
 
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 
 sudo apt-get update
