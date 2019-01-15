@@ -44,35 +44,39 @@ def QFPytest_collect_failures(tree: ElementTree):
     """
     root = tree.getroot()
     assert root.tag.lower() == 'testsuite'
-    for case in root.iter('testcase'):
+    for c_idx, case in enumerate(root.iter('testcase')):
         failure = case.find('./failure')
         error = case.find('./error')
         file = case.attrib.get('file', '')
         line = int(case.attrib.get('line', '0')) + 1
 
+        messages = []
         if failure is not None:
-            messages = list(dropwhile(
-                lambda l: not l.startswith('E '),
-                failure.text.split('\n'),
-            )) or ['E ' + 'UNK']
-
-            yield '{file}, {line}, {message}\n'.format(
-                file=file,
-                line=line,
-                message=messages[0].lstrip('E').lstrip(' '),
-            )
+            messages += [
+                l
+                for l in failure.text.split('\n')
+                if l.startswith('E ')
+            ] or ['E' + 'UNK']
 
         if error is not None:
-            messages = list(dropwhile(
-                lambda l: not l.startswith('E '),
-                error.text.split('\n'),
-            )) or ['E ' + 'UNK']
+            messages += [
+                l
+                for l in failure.text.split('\n')
+                if l.startswith('E ')
+            ] or ['E' + 'UNK']
 
+        for e_idx, msg in enumerate(messages):
+            msg = 'E{c_idx:d}-{e_idx:d}: {msg}'.format(
+                c_idx=c_idx,
+                e_idx=e_idx,
+                msg=msg.lstrip('E ').lstrip(' '),
+            )
             yield '{file}, {line}, {message}\n'.format(
                 file=file,
                 line=line,
-                message=messages[0].lstrip('E').lstrip(' '),
+                message=msg,
             )
+
 
 def QFPytest_print_failures(path: str) -> None:
     """

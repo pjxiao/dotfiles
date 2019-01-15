@@ -71,5 +71,12 @@ test -d ${_bundle_dir}/camelcasemotion || \
         https://github.com/vim-scripts/camelcasemotion \
         ${_bundle_dir}/camelcasemotion
 
+# added at 2019-01-15
+test -d ${_bundle_dir}/indentLine || \
+    git clone \
+        --depth=1 \
+        https://github.com/Yggdroot/indentLine.git \
+        ${_bundle_dir}/indentLine
+
 
 unset _bundle_dir
