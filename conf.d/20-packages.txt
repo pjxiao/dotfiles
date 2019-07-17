@@ -2,7 +2,9 @@ byobu
 cabextract
 clang
 curl
-docker-engine
+docker-ce
+docker-ce-cli
+containerd.io
 dstat
 dnsutils
 expect

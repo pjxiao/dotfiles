@@ -11,11 +11,10 @@ cat <<EOL | sudo tee /etc/apt/sources.list.d/contrib.list
 deb http://httpredir.debian.org/debian/ ${DEBIAN_REL} main contrib non-free
 EOL
 
-cat <<EOL | sudo tee /etc/apt/sources.list.d/docker.list
-# Auto-generated
-# Docker (Debian ${DEBIAN_VER} "${DEBIAN_REL}")
-deb https://apt.dockerproject.org/repo debian-${DEBIAN_REL} main
-EOL
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 

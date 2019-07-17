@@ -14,11 +14,14 @@ test -f "${HOME}/.vim/autoload/pathogen.vim" || \
 
 
 # added at 2017-11-03
-test -d ${_bundle_dir}/syntastic || \
-    git clone \
-        --depth=1 \
-        https://github.com/vim-syntastic/syntastic.git \
-        ${_bundle_dir}/syntastic
+# test -d ${_bundle_dir}/syntastic || \
+#     git clone \
+#         --depth=1 \
+#         https://github.com/vim-syntastic/syntastic.git \
+#         ${_bundle_dir}/syntastic
+# removed at 2019-06-27
+test -d ${_bundle_dir}/syntastic && \
+    rm -vrf ${_bundle_dir}/syntastic
 
 
 # added at 2017-11-03
@@ -77,6 +80,21 @@ test -d ${_bundle_dir}/indentLine || \
         --depth=1 \
         https://github.com/Yggdroot/indentLine.git \
         ${_bundle_dir}/indentLine
+
+# added at 2019-04-10
+test -d ${_bundle_dir}/vim-yaml-folds || \
+    git clone \
+        --depth=1 \
+        https://github.com/pedrohdz/vim-yaml-folds \
+        ${_bundle_dir}/vim-yaml-folds
+
+
+# added at 2019-06-27
+test -d ${_bundle_dir}/ale || \
+    git clone \
+        --depth=1 \
+        https://github.com/w0rp/ale.git \
+        ${_bundle_dir}/ale
 
 
 unset _bundle_dir
